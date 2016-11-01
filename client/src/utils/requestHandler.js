@@ -1,5 +1,5 @@
 // const url = /^(development|test)$/.test(process.env.NODE_ENV) ? 'http://localhost:3000' : '';
-const url = process.env.BASE_URL + ':3000';
+const url = process.env.BASE_URL;
 
 export default {
   /**
