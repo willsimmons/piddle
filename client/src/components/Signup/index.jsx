@@ -106,8 +106,9 @@ class Signup extends Component {
           />
         </form>
         <div className="signupError">{this.state.error}</div>
-        <span>Have an account? </span>
-        <Link to="/login">Log in</Link>
+        <img src='//www.paypalobjects.com/webstatic/en_US/developer/docs/lipp/loginwithpaypalbutton.png' />
+        <span> Have an account? </span>
+          <Link to="/login">Log in</Link>
       </div>
     );
   }

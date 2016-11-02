@@ -74,6 +74,7 @@ class Login extends Component {
             onClick={event => this.submitLoginForm(event)}
           />
         </form>
+        <img src='//www.paypalobjects.com/webstatic/en_US/developer/docs/lipp/loginwithpaypalbutton.png' />
         <div className="loginError">{this.state.error}</div>
         <span>Need an account? </span>
         <Link to="/signup">Sign up</Link>
