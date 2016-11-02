@@ -7,6 +7,6 @@ module.exports = {
   },
   bcryptHashRounds: 10,
   jwt: {
-    secret: process.env.JWT_SECRET || 'manatee_jwt_secret',
+    secret: process.env.JWT_SECRET || 'platypus_jwt_secret',
   },
 };
