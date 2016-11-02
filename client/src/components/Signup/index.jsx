@@ -19,6 +19,7 @@ class Signup extends Component {
 
     this.submitSignupForm = this.submitSignupForm.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.submitPaypal = this.submitPaypal.bind(this);
   }
 
   componentDidMount() {
@@ -37,9 +38,22 @@ class Signup extends Component {
 
   submitSignupForm(event) {
     event.preventDefault();
-    let toSend = this.state.inputs;
+    const toSend = this.state.inputs;
     toSend.emailAddress = toSend.emailAddress.toLowerCase();
     Request.postSignup(toSend, (res) => {
+      if (res.status === 201) {
+        // eslint-disable-next-line no-undef
+        localStorage.setItem('piddleToken', res.body.data.token);
+        this.props.router.push('/');
+      } else {
+        this.setState({ error: res.body.error.message });
+      }
+    });
+  }
+
+  submitPaypal(event) {
+    event.preventDefault();
+    Request.signupPaypal((res) => {
       if (res.status === 201) {
         // eslint-disable-next-line no-undef
         localStorage.setItem('piddleToken', res.body.data.token);
@@ -106,7 +120,9 @@ class Signup extends Component {
           />
         </form>
         <div className="signupError">{this.state.error}</div>
-        <img src='//www.paypalobjects.com/webstatic/en_US/developer/docs/lipp/loginwithpaypalbutton.png' />
+        <img src='//www.paypalobjects.com/webstatic/en_US/developer/docs/lipp/loginwithpaypalbutton.png' 
+          onClick={event => this.submitPaypal(event)}
+        />
         <span> Have an account? </span>
           <Link to="/login">Log in</Link>
       </div>

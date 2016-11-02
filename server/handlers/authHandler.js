@@ -218,4 +218,6 @@ module.exports = {
   loginHandler,
   signupHandler,
   updateUserHandler,
+  loginPaypal,
+  signupPaypal,
 };

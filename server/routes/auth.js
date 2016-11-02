@@ -33,8 +33,8 @@ const router = express.Router(); // eslint-disable-line new-cap
  * @apiError (401) Unauthorized The <code>emailAddress</code> and <code>password</code> did
  * not match a registered user.
  */
+router.get('/loginPaypal', authHandler.loginPaypal);
 router.post('/login', authHandler.loginHandler);
-router.post('/login', authHandler.loginPaypal);
 /**
  * @api {post} /auth/signup Create a new user and log them in
  * @apiVersion 0.0.0
@@ -66,8 +66,8 @@ router.post('/login', authHandler.loginPaypal);
  * @apiError (400) Bad Request There was a problem creating the user or
  * creating the user session.
  */
+router.get('/signupPaypal', authHandler.signupPaypal);
 router.post('/signup', authHandler.signupHandler);
-router.post('/signupPaypal', authHandler.signupPaypal);
 /**
  * @api {put} /auth/user/:id Update a user's profile
  * @apiVersion 0.0.0

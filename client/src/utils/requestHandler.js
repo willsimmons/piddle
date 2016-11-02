@@ -10,15 +10,13 @@ export default {
    */
   postLogin: (data, callback) => {
     let status;
-
     // eslint-disable-next-line no-undef
     fetch(`${url}/auth/login`, {
-      method: 'POST',
+      method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
     })
     .then((res) => {
       status = res.status;
@@ -34,9 +32,36 @@ export default {
    * @param {string} password
    * @param {requestCallback} cb - The callback that handles the response.
    */
+  signupPaypal: (callback) => {
+    // eslint-disable-next-line no-undef
+    fetch(`${url}/auth/signupPaypal`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(() => {
+      callback();
+    });
+  },
+
+  loginPaypal: (callback) => {
+    // eslint-disable-next-line no-undef
+    fetch(`${url}/auth/loginPaypal`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(() => {
+      callback();
+    });
+  },
+
   postSignup: (data, callback) => {
     let status;
-
     // eslint-disable-next-line no-undef
     fetch(`${url}/auth/signup`, {
       method: 'POST',

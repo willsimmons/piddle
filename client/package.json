@@ -6,6 +6,7 @@
     "react-scripts": "0.6.1"
   },
   "dependencies": {
+    "better-express-errors": "^1.0.2",
     "bootstrap": "^3.3.7",
     "chai": "^3.5.0",
     "enzyme": "^2.5.1",

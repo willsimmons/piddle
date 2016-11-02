@@ -1,3 +1,4 @@
+require('dotenv').config({silent: true});
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -7,7 +8,6 @@ const path = require('path');
 const config = require('../config');
 const passport = require('./passportConfig');
 const bodyParser = require('body-parser');
-
 const app = express();
 
 // Don't enable CORS in production.
