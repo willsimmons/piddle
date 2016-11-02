@@ -4,7 +4,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const passport = require('passport');
 const config = require('../config');
 const userController = require('./dbControllers/userController');
-
+const PaypalTokenStrategy = require('passport-paypal-token');
 
 const jwtOptions = {
   secretOrKey: config.jwt.secret,
@@ -20,6 +20,21 @@ passport.use(new JwtStrategy(jwtOptions, (jwtPayload, done) => {
       return done(null, userInstance);
     })
     .catch(err => done(err));
+}));
+
+passport.use(new PaypalTokenStrategy({
+  clientID: process.env.PAYPAL_ID,
+  clientSecret: process.env.PAYPAL_SECRET,
+  passReqToCallback: true
+}, (req, accessToken, refreshToken, profile, done) => {
+    userController.findUserByEmailAddress(profile.email)
+      .then((userInstance) => {
+        if (!userInstance) {
+          return done(null, false, { message: 'User does not exist' });
+        }
+        return done(null, userInstance);
+      })
+      .catch(err => done(err));
 }));
 
 passport.serializeUser((user, done) => {

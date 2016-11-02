@@ -15,7 +15,7 @@ const config = require('../../config');
  * status is set as 401 UNAUTHORIZED. If a valid token is present, the user
  * info is set on `request.user`.
  */
-const ensureAuthenticated = passport.authenticate('jwt', { session: false });
+const ensureAuthenticated = passport.authenticate(['jwt', 'paypal-token'], { session: false });
 
 /**
  * Generate a JSON Web Token for a user given a `User` instance from the database.
@@ -43,6 +43,42 @@ const generateJWT = (userInstance) => {
  * @param {writeableStream} response Response stream. See API documentation for parameters.
  */
 const loginHandler = (request, response) => {
+  const emailAddress = request.body.emailAddress;
+  const password = request.body.password;
+  userController.findUserByEmailAddress(emailAddress)
+    .then((userInstance) => {
+      if (!userInstance) {
+        return response.status(400).json({
+          error: {
+            message: 'Incorrect email address or password',
+          },
+        });
+      }
+      return userController.verifyUser(emailAddress, password)
+        .then((match) => {
+          if (!match) {
+            return response.status(400).json({
+              error: {
+                message: 'Incorrect email address or password',
+              },
+            });
+          }
+          return response.status(201).json({
+            data: {
+              message: 'Successfully generated user token',
+              token: generateJWT(userInstance),
+            },
+          });
+        });
+    })
+    .catch(() => response.status(500).json({
+      error: {
+        message: 'There was an error processing your login.',
+      },
+    }));
+};
+
+const loginPaypal = (request, response) => {
   const emailAddress = request.body.emailAddress;
   const password = request.body.password;
   userController.findUserByEmailAddress(emailAddress)
@@ -113,6 +149,37 @@ const signupHandler = (request, response) => {
         );
     });
 };
+
+const signupPaypal = (request, response) => {
+  userController.findUserByEmailAddress(request.body.emailAddress)
+    .then((userInstance) => {
+      if (userInstance) {
+        return response.status(400).json({
+          error: {
+            message: 'User already exists.',
+          },
+        });
+      }
+      // user does not exist
+      return userController.createUser(request.body)
+        .then(createdUserInstance =>
+          response.status(201).json({
+            data: {
+              message: 'Successfully created user and generated user token',
+              token: generateJWT(createdUserInstance),
+            },
+          })
+        )
+        .catch(() =>
+          response.status(400).json({
+            error: {
+              message: 'There was a problem creating the user',
+            },
+          })
+        );
+    });
+};
+
 
 /**
  * Update a user record.

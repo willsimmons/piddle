@@ -34,7 +34,7 @@ const router = express.Router(); // eslint-disable-line new-cap
  * not match a registered user.
  */
 router.post('/login', authHandler.loginHandler);
-
+router.post('/login', authHandler.loginPaypal);
 /**
  * @api {post} /auth/signup Create a new user and log them in
  * @apiVersion 0.0.0
@@ -67,7 +67,7 @@ router.post('/login', authHandler.loginHandler);
  * creating the user session.
  */
 router.post('/signup', authHandler.signupHandler);
-
+router.post('/signupPaypal', authHandler.signupPaypal);
 /**
  * @api {put} /auth/user/:id Update a user's profile
  * @apiVersion 0.0.0
