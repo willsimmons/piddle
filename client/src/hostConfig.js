@@ -1,7 +1,4 @@
-import Dotenv from 'dotenv';
-Dotenv.config({path: '../../.env'});
-
-const addedHostname = process.env.HOSTNAME;
+const addedHostname = '';
 
 const prepend = 'http://';
 const localhost = 'localhost';
