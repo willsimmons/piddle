@@ -1,7 +1,7 @@
 const addedHostname = '';
 
 const prepend = 'http://';
-const localhost = 'http://localhost';
+const localhost = 'localhost';
 const serverPort = '3000';
 const url = prepend + ( addedHostname ? addedHostname : localhost ) + ":" + serverPort;
 
