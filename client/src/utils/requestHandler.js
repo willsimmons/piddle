@@ -11,7 +11,7 @@ export default {
   postLogin: (data, callback) => {
     let status;
     // eslint-disable-next-line no-undef
-    fetch(`${url}/auth/login`, {
+    fetch(`//localhost:3001/auth/login`, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -40,10 +40,12 @@ export default {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
+      mode: 'cors',
     })
-    .then(() => {
-      callback();
-    });
+    .then((res) => {
+      console.log(res);
+      callback(res);
+    }).catch(err =>console.log(err));
   },
 
   loginPaypal: (callback) => {
@@ -54,10 +56,12 @@ export default {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
+      mode: 'cors',
     })
-    .then(() => {
-      callback();
-    });
+    .then((res) => {
+      console.log(res);
+      callback(res);
+    }).catch(err =>console.log(err));
   },
 
   postSignup: (data, callback) => {

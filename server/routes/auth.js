@@ -35,12 +35,14 @@ const router = express.Router(); // eslint-disable-line new-cap
  */
 router.get('/loginPaypal', authHandler.loginPaypal);
 router.post('/login', authHandler.loginHandler);
+router.get('/paypal/return', authHandler.reply);
+
 /**
  * @api {post} /auth/signup Create a new user and log them in
  * @apiVersion 0.0.0
  * @apiName Signup
  * @apiGroup Authentication
- *
+
  * @apiParam {string} emailAddress Email address of the user.
  * @apiParam {string} password Password of the user.
  * @apiParam {string} [name] Display name of the user.

@@ -15,7 +15,19 @@ const config = require('../../config');
  * status is set as 401 UNAUTHORIZED. If a valid token is present, the user
  * info is set on `request.user`.
  */
-const ensureAuthenticated = passport.authenticate(['jwt', 'paypal-token'], { session: false });
+const ensureAuthenticated = () => {
+  console.log('authenticating?');
+  passport.authenticate(['jwt', 'paypal-token'], { session: false });
+};
+
+const reply = () => {passport.authenticate('paypal', { failureRedirect: '/' }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    console.log(req.isAuthenticated());
+    res.redirect('/');
+  };
+};
+
 
 /**
  * Generate a JSON Web Token for a user given a `User` instance from the database.
@@ -220,4 +232,5 @@ module.exports = {
   updateUserHandler,
   loginPaypal,
   signupPaypal,
+  reply,
 };
