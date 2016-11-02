@@ -6,6 +6,9 @@ npm-debug.log*
 # Mac Specific
 .DS_Store
 
+# Environmental Variable
+.env
+
 # Runtime data
 pids
 *.pid
