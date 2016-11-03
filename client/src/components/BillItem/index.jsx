@@ -19,7 +19,6 @@ const BillItem = (props) => {
     || props.interactionType === Symbol.for('edit')
   );
 
-  // eslint-disable-next-line
   const maxDecimalFix = (number) => {
     // check if item has more than two decimals
     const decimalPlaces = (number.toString().split('.')[1] || []).length;

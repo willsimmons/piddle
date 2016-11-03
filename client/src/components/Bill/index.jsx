@@ -696,7 +696,7 @@ class Bill extends React.Component {
               <div className="uploadBill">
                 <input type="file" accept="image/*" capture="camera" name="userPhoto" onChange={this._handleImageChange} />
                 <div>
-                {this.state.imagePreviewUrl ? <img src={this.state.imagePreviewUrl} /> : null}
+                  {this.state.imagePreviewUrl ? <img src={this.state.imagePreviewUrl} alt="uploaded receipt"/> : null}
                 </div>
               </div>
             }
