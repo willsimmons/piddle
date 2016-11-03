@@ -83,7 +83,7 @@ TipField.propTypes = {
   changeTipPercent: React.PropTypes.func.isRequired,
   changeTipValue: React.PropTypes.func.isRequired,
   interactionType: React.PropTypes.symbol.isRequired,
-  tipValue: React.PropTypes.number.isRequired,
+  // tipValue: React.PropTypes.number.isRequired,
 };
 
 export default TipField;
