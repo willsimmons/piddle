@@ -33,7 +33,7 @@ class Login extends Component {
 
   submitLoginForm(event) {
     event.preventDefault();
-    Request.postLogin({emailAddress: this.state.inputs.emailAddress.toLowerCase(), password: this.state.inputs.password}, (res) => {
+    Request.postLogin({ emailAddress: this.state.inputs.emailAddress.toLowerCase(), password: this.state.inputs.password }, (res) => {
       if (res.status === 201) {
         // eslint-disable-next-line no-undef
         localStorage.setItem('piddleToken', res.body.data.token);
@@ -52,30 +52,33 @@ class Login extends Component {
         </p>
         <form id="loginForm">
           <table>
-            <tr>
-              <td><label htmlFor="emailAddress">Email</label></td>
-              <td><input
+            <tbody>
+              <tr>
+                <td><label htmlFor="emailAddress">Email</label></td>
+                <td><input
                   type="text"
                   id="emailAddress"
                   name="emailAddress"
                   onChange={event => this.handleInputChange(event)}
                 /></td>
-            </tr>
-            <tr>
-              <td><label htmlFor="password">Password</label></td>
-              <td><input
-                type="password"
-                id="password"
-                name="password"
-                onChange={event => this.handleInputChange(event)}
-              /></td>
-            </tr>
+              </tr>
+              <tr>
+                <td><label htmlFor="password">Password</label></td>
+                <td><input
+                  type="password"
+                  id="password"
+                  name="password"
+                  onChange={event => this.handleInputChange(event)}
+                /></td>
+              </tr>
+            </tbody>
           </table>
           <p><button
             bsStyle="primary"
             bsSize="large"
             id="submitLogin"
-            onClick={event => this.submitLoginForm(event)}>
+            onClick={event => this.submitLoginForm(event)}
+          >
             Login
           </button></p>
         </form>
