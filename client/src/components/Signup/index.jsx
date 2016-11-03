@@ -64,66 +64,68 @@ class Signup extends Component {
         </p>
         <form id="signupForm">
           <table>
-            <tr>
-              <td><label htmlFor="emailAddress">Email</label></td>
-              <td><input
-                type="text"
-                className="loginInput"
-                id="emailAddress"
-                name="emailAddress"
-                onChange={event => this.handleInputChange(event)}
-              /></td>
-            </tr>
-            <tr>
-              <td><label htmlFor="password">Password</label></td>
-              <td><input
-                type="password"
-                className="loginInput"
-                id="password"
-                name="password"
-                onChange={event => this.handleInputChange(event)}
-              /></td>
-            </tr>
-            <tr>
-              <td><label htmlFor="name">Name</label></td>
-              <td><input
-                type="text"
-                className="loginInput"
-                id="name"
-                name="name"
-                onChange={event => this.handleInputChange(event)}
-              /></td>
-            </tr>
-            <tr>
-              <td><label htmlFor="squareId">Square ID</label></td>
-              <td><input
-                type="text"
-                className="loginInput"
-                id="squareId"
-                name="squareId"
-                onChange={event => this.handleInputChange(event)}
-              /></td>
-            </tr>
-            <tr>
-              <td><label htmlFor="paypalId">PayPal ID</label></td>
-              <td><input
-                type="text"
-                className="loginInput"
-                id="paypalId"
-                name="paypalId"
-                onChange={event => this.handleInputChange(event)}
-              /></td>
-            </tr>
-            <tr>
-              <td><label htmlFor="phone">Phone Number</label></td>
-              <td><input
-                type="text"
-                className="loginInput"
-                id="phone"
-                name="phone"
-                onChange={event => this.handleInputChange(event)}
-              /></td>
-            </tr>
+            <tbody>
+              <tr>
+                <td><label htmlFor="emailAddress">Email</label></td>
+                <td><input
+                  type="text"
+                  className="loginInput"
+                  id="emailAddress"
+                  name="emailAddress"
+                  onChange={event => this.handleInputChange(event)}
+                /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="password">Password</label></td>
+                <td><input
+                  type="password"
+                  className="loginInput"
+                  id="password"
+                  name="password"
+                  onChange={event => this.handleInputChange(event)}
+                /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="name">Name</label></td>
+                <td><input
+                  type="text"
+                  className="loginInput"
+                  id="name"
+                  name="name"
+                  onChange={event => this.handleInputChange(event)}
+                /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="squareId">Square ID</label></td>
+                <td><input
+                  type="text"
+                  className="loginInput"
+                  id="squareId"
+                  name="squareId"
+                  onChange={event => this.handleInputChange(event)}
+                /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="paypalId">PayPal ID</label></td>
+                <td><input
+                  type="text"
+                  className="loginInput"
+                  id="paypalId"
+                  name="paypalId"
+                  onChange={event => this.handleInputChange(event)}
+                /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="phone">Phone Number</label></td>
+                <td><input
+                  type="text"
+                  className="loginInput"
+                  id="phone"
+                  name="phone"
+                  onChange={event => this.handleInputChange(event)}
+                /></td>
+              </tr>
+            </tbody>
           </table>
           <input
             type="submit"
