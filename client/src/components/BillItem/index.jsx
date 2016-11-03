@@ -101,17 +101,19 @@ const BillItem = (props) => {
   );
 };
 
+// some of the below should not be required if our app stays constructed
+// as basically a one page application
 BillItem.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   changeBillItem: React.PropTypes.func.isRequired,
   claimBillItem: React.PropTypes.func.isRequired,
   deleteBillItem: React.PropTypes.func.isRequired,
-  debtorId: React.PropTypes.string.isRequired,
+  // debtorId: React.PropTypes.string.isRequired,
   description: React.PropTypes.string.isRequired,
-  id: React.PropTypes.string.isRequired,
+  // id: React.PropTypes.string.isRequired,
   index: React.PropTypes.number.isRequired,
   interactionType: React.PropTypes.symbol.isRequired,
-  paid: React.PropTypes.bool.isRequired,
+  // paid: React.PropTypes.bool.isRequired,
   price: React.PropTypes.number.isRequired,
 };
 
