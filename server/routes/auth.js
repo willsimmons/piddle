@@ -67,7 +67,8 @@ router.post('/login', authHandler.loginHandler);
  * creating the user session.
  */
 router.post('/signup', authHandler.signupHandler);
-
+router.get('/facebook', authHandler.facebookDirect);
+router.get('/facebook/callback', authHandler.facebookReply);
 /**
  * @api {put} /auth/user/:id Update a user's profile
  * @apiVersion 0.0.0

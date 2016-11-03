@@ -15,7 +15,7 @@ const config = require('../../config');
  * status is set as 401 UNAUTHORIZED. If a valid token is present, the user
  * info is set on `request.user`.
  */
-const ensureAuthenticated = passport.authenticate('jwt', { session: false });
+const ensureAuthenticated = passport.authenticate(['jwt', 'facebook'], { session: false });
 
 /**
  * Generate a JSON Web Token for a user given a `User` instance from the database.
@@ -78,6 +78,14 @@ const loginHandler = (request, response) => {
       },
     }));
 };
+
+const facebookDirect = passport.authenticate('facebook', { scope: ['user_friends', 'email']} );
+
+const facebookReply = passport.authenticate('facebook', { failureRedirect: '/login' },
+(req, res) => {
+    // Successful authentication, redirect home.
+  res.redirect('/');
+});
 
 /**
  * Create a user in the database and genertate a JSON Web Token for the user.
@@ -152,4 +160,6 @@ module.exports = {
   loginHandler,
   signupHandler,
   updateUserHandler,
+  facebookDirect,
+  facebookReply,
 };

@@ -28,6 +28,28 @@ export default {
       callback({ body, status });
     });
   },
+
+  getfacebookLogin: (data, callback) => {
+    let status;
+    // eslint-disable-next-line no-undef
+    fetch(`${url}/auth/facebook`, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then((res) => {
+      console.log(res);
+      status = res.status;
+      console.log(status);
+      return res.json();
+    })
+    .then((body) => {
+      callback({ body, status });
+    });
+  },
   /**
    * Signup POST request to /auth/signup
    * @param {string} emailAddress

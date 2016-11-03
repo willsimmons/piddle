@@ -22,6 +22,7 @@ ReactDOM.render((
         <Route path="login" component={Login} />
         <Route path="signup" component={Signup} />
         <Route path="profile" component={Profile} />
+        <Route path='auth/facebook/callback' component={Profile} />
       </Route>
     </Router>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css" />

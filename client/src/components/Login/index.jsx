@@ -15,6 +15,7 @@ class Login extends Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.submitLoginForm = this.submitLoginForm.bind(this);
+    this.facebooklogin = this.facebooklogin.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +39,20 @@ class Login extends Component {
       if (res.status === 201) {
         // eslint-disable-next-line no-undef
         localStorage.setItem('piddleToken', res.body.data.token);
+        this.props.router.push('/');
+      } else {
+        this.setState({ error: res.body.error.message });
+      }
+    });
+  }
+
+  facebooklogin(event) {
+    event.preventDefault();
+    Request.getfacebookLogin((res) => {
+      if (res.status !==400) { //should be for 201 only
+        console.log(res.body);
+        // eslint-disable-next-line no-undef
+        localStorage.setItem('piddleToken', res.body.data.user);
         this.props.router.push('/');
       } else {
         this.setState({ error: res.body.error.message });
@@ -86,6 +101,14 @@ class Login extends Component {
         <div className="loginError">{this.state.error}</div>
         <span>Need an account? </span>
         <Link to="/signup">Sign up</Link>
+        <p><button
+          bsStyle="primary"
+          bsSize="large"
+          id="submitLogin"
+          onClick={event => this.facebooklogin(event)}
+        >
+          FacebookLogin
+        </button></p>
       </div>
     );
   }

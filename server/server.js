@@ -12,6 +12,13 @@ const formidable = require('express-formidable');
 
 const app = express();
 
+app.all('/*', function(req, res, next) {
+   res.header("Access-Control-Allow-Origin", "*");
+   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+   res.header("Access-Control-Allow-Methods", "GET, POST","PUT");
+   next();
+});
+
 // Don't enable CORS in production.
 if (/^(dev|test)$/.test(process.env.NODE_ENV)) {
   app.use(cors());
@@ -32,7 +39,6 @@ app.use('/auth', auth);
 app.use('*', (request, response) => {
   if (request.xhr || request.headers.accept.indexOf('json') > -1) {
     // request is an API request; respond with 404
-    return response.sendStatus(404);
   }
   // request probably came from browser; send back index page and let React client handle
   return response.sendFile(path.join(__dirname, '../client/build/index.html'));
