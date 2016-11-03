@@ -15,14 +15,13 @@ const app = express();
 app.all('/*', function(req, res, next) {
    res.header("Access-Control-Allow-Origin", "*");
    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-   res.header("Access-Control-Allow-Methods", "GET, POST","PUT");
+   res.header("Access-Control-Allow-Methods", "GET, POST, PUT");
    next();
 });
 
-// Don't enable CORS in production.
-if (/^(dev|test)$/.test(process.env.NODE_ENV)) {
+
   app.use(cors());
-}
+
 if (process.env.NODE_ENV !== 'test') {
   // Don't log requests during testing
   app.use(morgan('dev'));

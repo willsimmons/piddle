@@ -25,10 +25,10 @@ passport.use(new JwtStrategy(jwtOptions, (jwtPayload, done) => {
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_ID,
   clientSecret: process.env.FACEBOOK_SECRET,
-  callbackURL: '//127.0.0.1:3001/auth/facebook/callback',
+  callbackURL: '127.0.0.1:3001/auth/facebook/callback',
   profileFields: ['displayName', 'email'],
-  scope: 'email',
 }, (accessToken, refreshToken, profile, done) => {
+  console.log('in callback');
   console.log(profile);
   userController.findUserByEmailAddress(profile.email)
     .then((userInstance) => {

@@ -79,13 +79,13 @@ const loginHandler = (request, response) => {
     }));
 };
 
-const facebookDirect = passport.authenticate('facebook', { scope: ['user_friends', 'email']} );
+const facebookDirect = passport.authenticate('facebook', { scope: ['user_friends', 'email'] });
 
-const facebookReply = passport.authenticate('facebook', { failureRedirect: '/login' },
-(req, res) => {
+const facebookReply = (req, res) => {
     // Successful authentication, redirect home.
   res.redirect('/');
-});
+}
+
 
 /**
  * Create a user in the database and genertate a JSON Web Token for the user.
