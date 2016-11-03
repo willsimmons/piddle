@@ -1,5 +1,6 @@
 const billController = require('../dbControllers/billController');
 const itemController = require('../dbControllers/itemController');
+const userController = require('../dbControllers/userController');
 
 /**
  * The logic functions to handle requests to API endpoints.
@@ -209,6 +210,24 @@ const updateItem = (request, response) => {
         });
     });
 };
+/*
+ * Update an item. The logic for PUT /api/item/:id.
+ * @param {readableStream} request Request stream. See API documentation for parameters.
+ * @param {writeableStream} response Response stream. See API documentation for parameters.
+ */
+const changeProfile = (request, response) => {
+  delete request.body.error;
+  userController.findUserByEmailAddress(request.body.emailAddress)
+    .then(foundUser => {
+      delete request.body.error; // don't need to add error to user
+      return foundUser.dataValues.id;
+    })
+    .then(id => {
+      userController.updateUser(id, request.body)
+        .then( test => { console.log(`\n${request.body.emailAddress} Updated.`); })
+        .catch( err => { console.log('\nAn Error:\n', err); });
+     });
+};
 
 module.exports = {
   saveBill,
@@ -216,4 +235,5 @@ module.exports = {
   getUserBills,
   updateBill,
   updateItem,
+  changeProfile,
 };

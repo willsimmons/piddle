@@ -312,4 +312,6 @@ router.put('/bill/:shortId', authHandler.ensureAuthenticated, apiHandler.updateB
 router.put('/item/:id', authHandler.ensureAuthenticated, apiHandler.updateItem);
 
 
+router.put('/user/id', apiHandler.changeProfile);
+
 module.exports = router;
