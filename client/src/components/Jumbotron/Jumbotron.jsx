@@ -19,7 +19,7 @@ class JumbotronInstance extends Component {
         <h1>Piddle</h1>
         <p className="lead">Split the bill like a pro.</p>
         <Row>
-          <Col xs="12" sm={6}>
+          <Col xs={12} sm={6}>
             <p><Button bsStyle="primary" bsSize="large" onClick={this.handleCallToAction}>
               Split a Bill
             </Button></p>
