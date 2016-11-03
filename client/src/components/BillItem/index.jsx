@@ -19,15 +19,28 @@ const BillItem = (props) => {
     || props.interactionType === Symbol.for('edit')
   );
 
+  // eslint-disable-next-line
+  const maxDecimalFix = (number) => {
+    // check if item has more than two decimals
+    const decimalPlaces = (number.toString().split('.')[1] || []).length;
+    if (decimalPlaces > 2) {
+      number = Number(number).toFixed(2);
+    }
+    return Number(number);
+  }
+
   const fieldChange = (event) => {
     const field = {
       name: event.target.getAttribute('name').match(/([a-z]+)$/)[1],
       tagName: event.target.tagName,
       type: event.target.getAttribute('type'),
     };
-    field.value = (field.type === 'number') ?
-      Number.parseFloat(event.target.value) :
-      event.target.value;
+
+    if (field.type === 'number') {
+      field.value = maxDecimalFix(event.target.value);
+    } else {
+      field.value = event.target.value;
+    }
 
     props.changeBillItem(props.index, {
       [field.name]: field.value,
