@@ -21,6 +21,7 @@ class Profile extends Component {
     } else {
       const userData = jwtDecode(token);
       this.state = {
+        oldEmailAddress: userData.emailAddress,
         emailAddress: userData.emailAddress,
         name: userData.name,
         squareId: userData.squareId,
@@ -40,13 +41,16 @@ class Profile extends Component {
 
   submitUpdateForm(event) {
     event.preventDefault();
+    console.log(this.state);
     Request.putUpdate(this.state, (res) => {
       if (res.status === 201) {
-        this.props.router.push('/');
       } else {
         this.setState({ error: 'Error updating info.' });
       }
+      localStorage.removeItem('piddleToken');
+      window.location = ('/login');
     });
+    
   }
 
   render() {

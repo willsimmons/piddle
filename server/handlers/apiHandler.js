@@ -123,8 +123,7 @@ const updateBill = (request, response) => {
   delete updateParams.id; // don't allow id to update
   delete updateParams.shortId; // don't allow shortId to update
   delete updateParams.payerId; // don't allow payerId to update
-  // delete updateParams.items; // don't allow changes to Items
-
+  delete updateParams.items; // don't allow changes to Items
   billController.retrieveBillWithPaidItems(shortId)
   .then((billRecord) => {
     if (!billRecord) {
@@ -148,14 +147,6 @@ const updateBill = (request, response) => {
         },
       });
     }
-
-    // Updating edited items
-    if (updateParams.items) {
-      updateParams.items.forEach(item => {
-        itemController.updateItem(item.id, item);
-      });
-    }
-
     return billController.updateBill(shortId, updateParams)
       .then(updatedBillRecord =>
         response.status(200).json({
@@ -241,6 +232,7 @@ const updateItem = (request, response) => {
         });
     });
 };
+
 /*
  * Update an item. The logic for PUT /api/item/:id.
  * @param {readableStream} request Request stream. See API documentation for parameters.
@@ -248,16 +240,19 @@ const updateItem = (request, response) => {
  */
 const changeProfile = (request, response) => {
   delete request.body.error;
-  userController.findUserByEmailAddress(request.body.emailAddress)
+  userController.findUserByEmailAddress(request.body.oldEmailAddress)
+    .catch(err => console.log('Couldn\'t find a user with that email address') )
     .then(foundUser => {
-      delete request.body.error; // don't need to add error to user
+      delete request.body.oldEmailAddress; // don't need to add
       return foundUser.dataValues.id;
     })
     .then(id => {
       userController.updateUser(id, request.body)
-        .then( test => { console.log(`\n${request.body.emailAddress} Updated.`); })
+        .then( test => { 
+          response.end('Changed the user!');
+        })
         .catch( err => { console.log('\nAn Error:\n', err); });
-     });
+    });
 };
 
 module.exports = {
