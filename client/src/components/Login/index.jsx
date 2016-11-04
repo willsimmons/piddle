@@ -32,7 +32,6 @@ class Login extends Component {
   }
 
   submitLoginForm(event) {
-    console.log('in loginform');
     event.preventDefault();
     Request.postLogin({ emailAddress: this.state.inputs.emailAddress.toLowerCase(), password: this.state.inputs.password }, (res) => {
       if (res.status === 201) {
