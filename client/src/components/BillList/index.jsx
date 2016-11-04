@@ -1,5 +1,6 @@
 import React from 'react';
 import Bill from './../Bill';
+import Request from '../../utils/requestHandler';
 
 class BillList extends React.Component {
 
@@ -11,29 +12,33 @@ class BillList extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   const context = this;
-  //   //make api call
-  //   const data = this.requestFeedData(context.props.currentFeed);
-  //   data.done(results => {
-  //     context.setState({
-  //       billList: results
-  //     });
-  //   });
-  // }
+  componentDidMount() {
+    const context = this;
+    Request.postLogin((res) => {
+      if (res.status === 200) {
+        // eslint-disable-next-line no-undef
+        context.setState({
+          billList: res.data,
+        });
+      } else {
+        this.setState({ error: res.body.error.message });
+      }
+    });
+  }
 
-
-  // componentDidUpdate(previousProps, previousState) {
-  //   if (previousProps.currentFeed !== this.props.currentFeed) {
-  //     const context = this;
-  //     const data = this.requestFeedData(context.props.currentFeed);
-  //     data.done(results => {
-  //       context.setState({
-  //         billList: results
-  //       });
-  //     });
-  //   }
-  // }
+  componentDidUpdate(previousProps, previousState) {
+    if (previousProps.billList !== this.props.billList) {
+      Request.postLogin((res) => {
+      if (res.status === 200) {
+        context.setState({
+          billList: res.data,
+        });
+      } else {
+        this.setState({ error: res.body.error.message });
+      }
+    });
+    }
+  }
 
   render() {
     return (
@@ -46,15 +51,6 @@ class BillList extends React.Component {
       </div>
     );
   }
-
-  // //request feed from server
-  // requestFeedData(id) {
-  //   return $.ajax({
-  //     url: `/channel/${id}`,
-  //     method: 'GET',
-  //     dataType: 'JSON',
-  //   });
-  // }
 
 }
 
