@@ -8,7 +8,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
-import BillList from './components/BillList'
+import BillList from './components/BillList';
 // import Bootstrap from 'react-bootstrap';
 
 ReactDOM.render((
