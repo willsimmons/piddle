@@ -59,42 +59,54 @@ class Profile extends Component {
         <h1>Welcome to your profile</h1>
         <h3>Update any info below</h3>
         <form id="signupForm">
-          <label htmlFor="emailAddress">Email</label>
-          <input
-            type="text"
-            className="updateInput"
-            id="emailAddress"
-            name="emailAddress"
-            onChange={event => this.handleInputChange(event)}
-            value={this.state.emailAddress}
-          />
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            className="updateInput"
-            id="name"
-            name="name"
-            onChange={event => this.handleInputChange(event)}
-            value={this.state.name}
-          />
-          <label htmlFor="password">square Id</label>
-          <input
-            type="text"
-            className="updateInput"
-            id="squareId"
-            name="squareId"
-            onChange={event => this.handleInputChange(event)}
-            value={this.state.squareId}
-          />
-          <label htmlFor="password">paypal Id</label>
-          <input
-            type="text"
-            className="updateInput"
-            id="paypalId"
-            name="paypalId"
-            onChange={event => this.handleInputChange(event)}
-            value={this.state.paypalId}
-          />
+          <table>
+            <tbody>
+              <tr>
+                <td><label htmlFor="emailAddress">Email</label></td>
+                <td><input
+                  type="text"
+                  className="updateInput"
+                  id="emailAddress"
+                  name="emailAddress"
+                  onChange={event => this.handleInputChange(event)}
+                  value={this.state.emailAddress}
+                /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="name">Name</label></td>
+                <td><input
+                  type="text"
+                  className="updateInput"
+                  id="name"
+                  name="name"
+                  onChange={event => this.handleInputChange(event)}
+                  value={this.state.name}
+                /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="squareId">Square ID</label></td>
+                <td><input
+                  type="text"
+                  className="updateInput"
+                  id="squareId"
+                  name="squareId"
+                  onChange={event => this.handleInputChange(event)}
+                  value={this.state.squareId}
+                /></td>
+              </tr>
+              <tr>
+                <td><label htmlFor="paypalId">PayPal ID</label></td>
+                <td><input
+                  type="text"
+                  className="updateInput"
+                  id="paypalId"
+                  name="paypalId"
+                  onChange={event => this.handleInputChange(event)}
+                  value={this.state.paypalId}
+                /></td>
+              </tr>
+            </tbody>
+          </table>
           <input
             type="submit"
             className="submitUpdate"
