@@ -19,7 +19,7 @@ ReactDOM.render((
         <Route path="bill" component={Bill}>
           <Route path=":id" component={Bill} />
         </Route>
-        <Route path="MyBills" component={BillList} />
+        <Route path="Bills" component={BillList} />
         <Route path="login" component={Login} />
         <Route path="signup" component={Signup} />
         <Route path="profile" component={Profile} />

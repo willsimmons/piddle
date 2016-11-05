@@ -1,42 +1,45 @@
 import React from 'react';
 import Bill from './../Bill';
-import Request from '../../utils/requestHandler';
 
 class BillList extends React.Component {
 
   constructor(props) {
     super(props);
-
+    const token = localStorage.getItem('piddleToken');
     this.state = {
       billList: [],
+      token : token,
     };
   }
 
-  componentDidMount() {
-    const context = this;
-    Request.postLogin((res) => {
-      if (res.status === 200) {
-        // eslint-disable-next-line no-undef
-        context.setState({
-          billList: res.data,
-        });
-      } else {
-        this.setState({ error: res.body.error.message });
-      }
+  grabData() {
+    // eslint-disable-next-line no-undef
+    console.log('grabbing data');
+    fetch(`${this.serverUrl}/api/bills`, {
+      method: 'GET',
+      headers: {
+        Authorization: `JWT ${this.state.token.raw}`,
+      },
+    })
+    .then(response => response.json())
+    .then(({ data }) => {
+      console.log(data);
+      return this.setState({
+        billList: data,
+      });
+    })
+    .catch((error) => {
+      this.setState({ error });
     });
+  }
+
+  componentDidMount() {
+    this.grabData();
   }
 
   componentDidUpdate(previousProps, previousState) {
     if (previousProps.billList !== this.props.billList) {
-      Request.postLogin((res) => {
-      if (res.status === 200) {
-        context.setState({
-          billList: res.data,
-        });
-      } else {
-        this.setState({ error: res.body.error.message });
-      }
-    });
+      this.grabData();
     }
   }
 
