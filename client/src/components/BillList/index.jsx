@@ -1,16 +1,16 @@
+import React from 'react';
+
 const url = /^(development|test)$/.test(process.env.NODE_ENV) ? 'http://localhost:3000' : '';
 
-import React from 'react';
 
 class BillList extends React.Component {
 
   constructor(props) {
     super(props);
-    this.bills = [];
     const token = localStorage.getItem('piddleToken');
     this.state = {
-      billList: [],
-      token : token.raw,
+      token: token.raw,
+      bills: null,
     };
   }
 
@@ -24,17 +24,18 @@ class BillList extends React.Component {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data);
-      this.props.bills = data;
-      return this.setState({
-        billList: data,
-      });
+      let converter = [];
+      for (let key in data) {
+        let bill = [data.description, data.shortId];
+        converter.push(bill);
+      }
+      return this.setState({bills: converter });
     })
     .catch((error) => {
       this.setState({ error });
     });
   }
-  
+
   componentWillMount() {
     const loadingToken = localStorage.getItem('piddleToken');
     this.setState({
@@ -46,21 +47,15 @@ class BillList extends React.Component {
     this.grabData(`JWT ${this.state.token}`);
   }
 
-  componentDidUpdate(previousProps, previousState) {
-    if (previousState.billList !== this.state.billList) {
-      this.grabData(`JWT ${this.state.token}`);
-    }
-  }
+  // componentDidUpdate(previousProps, previousState) {
+  //   if (previousState.billList !== this.state.billList) {
+  //     this.grabData(`JWT ${this.state.token}`);
+  //   }
+  // }
 
   render() {
+    console.log('STATE', this.state.bills);
     return (
-      <div>
-        {
-          this.state.bills === undefined ? <p>you have no bills</p> : this.state.bills.map((bill, index) =>
-            <p> {bill.description}</p>
-          )
-        }
-      </div>
     );
   }
 
