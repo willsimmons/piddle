@@ -13,8 +13,8 @@ class NavBar extends Component {
         3: '/login',
         4: '/signup',
         5: '/profile',
-        6: '/bills',
-        7: '/login',
+        // 6: '/bills',
+        6: '/login',
       },
     };
     this.handleLinkClick = this.handleLinkClick.bind(this);
@@ -51,8 +51,7 @@ class NavBar extends Component {
               <MenuItem eventKey={4} onSelect={this.handleLinkClick}>Sign Up</MenuItem>
               <MenuItem eventKey={5} onSelect={this.handleLinkClick}>Profile</MenuItem>
               <MenuItem divider />
-              <MenuItem eventKey={6} onSelect={this.handleLinkClick}>My Bills</MenuItem>
-              <MenuItem eventKey={7} onSelect={this.handleLogoutClick}>Log Out</MenuItem>
+              <MenuItem eventKey={6} onSelect={this.handleLogoutClick}>Log Out</MenuItem>
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
@@ -61,3 +60,5 @@ class NavBar extends Component {
   }
 }
 export default NavBar;
+
+              // <MenuItem eventKey={6} onSelect={this.handleLinkClick}>My Bills</MenuItem>
