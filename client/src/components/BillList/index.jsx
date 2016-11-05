@@ -1,12 +1,12 @@
 const url = /^(development|test)$/.test(process.env.NODE_ENV) ? 'http://localhost:3000' : '';
 
 import React from 'react';
-import Bill from './../Bill';
 
 class BillList extends React.Component {
 
   constructor(props) {
     super(props);
+    this.bills = [];
     const token = localStorage.getItem('piddleToken');
     this.state = {
       billList: [],
@@ -25,6 +25,7 @@ class BillList extends React.Component {
     .then(response => response.json())
     .then(data => {
       console.log(data);
+      this.props.bills = data;
       return this.setState({
         billList: data,
       });
@@ -55,8 +56,8 @@ class BillList extends React.Component {
     return (
       <div>
         {
-          this.state.billList.map((bill, index) =>
-            <Bill key={index} bill={bill}/>
+          this.state.bills === undefined ? <p>you have no bills</p> : this.state.bills.map((bill, index) =>
+            <p> {bill.description}</p>
           )
         }
       </div>
