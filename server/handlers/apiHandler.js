@@ -69,9 +69,11 @@ const getBill = (request, response) => {
  */
 const getUserBills = (request, response) => {
   const payerId = request.user.id;
+  console.log(payerId);
   billController.retrievePayerBills(payerId)
     .then((bills) => {
       const billsJSON = bills.map(bill => bill.toJSON());
+      console.log(billsJSON);
       response.status(200).json({ data: billsJSON });
     })
     .catch(() => response.status(500).json({

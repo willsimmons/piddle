@@ -13,7 +13,7 @@ class NavBar extends Component {
         3: '/login',
         4: '/signup',
         5: '/profile',
-        6: '/myBills',
+        6: '/bills',
         7: '/login',
       },
     };

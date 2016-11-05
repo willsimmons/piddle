@@ -1,3 +1,5 @@
+const url = /^(development|test)$/.test(process.env.NODE_ENV) ? 'http://localhost:3000' : '';
+
 import React from 'react';
 import Bill from './../Bill';
 
@@ -8,21 +10,20 @@ class BillList extends React.Component {
     const token = localStorage.getItem('piddleToken');
     this.state = {
       billList: [],
-      token : token,
+      token : token.raw,
     };
   }
 
-  grabData() {
+  grabData(token) {
     // eslint-disable-next-line no-undef
-    console.log('grabbing data');
-    fetch(`${this.serverUrl}/api/bills`, {
+    fetch(`${url}/api/bills`, {
       method: 'GET',
       headers: {
-        Authorization: `JWT ${this.state.token.raw}`,
+        Authorization: token,
       },
     })
     .then(response => response.json())
-    .then(({ data }) => {
+    .then(data => {
       console.log(data);
       return this.setState({
         billList: data,
@@ -32,14 +33,21 @@ class BillList extends React.Component {
       this.setState({ error });
     });
   }
+  
+  componentWillMount() {
+    const loadingToken = localStorage.getItem('piddleToken');
+    this.setState({
+      token: loadingToken,
+    });
+  }
 
   componentDidMount() {
-    this.grabData();
+    this.grabData(`JWT ${this.state.token}`);
   }
 
   componentDidUpdate(previousProps, previousState) {
-    if (previousProps.billList !== this.props.billList) {
-      this.grabData();
+    if (previousState.billList !== this.state.billList) {
+      this.grabData(`JWT ${this.state.token}`);
     }
   }
 
