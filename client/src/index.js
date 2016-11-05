@@ -8,7 +8,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
-import BillList from './components/BillList';
+// import BillList from './components/BillList';
 // import Bootstrap from 'react-bootstrap';
 
 ReactDOM.render((
@@ -19,7 +19,6 @@ ReactDOM.render((
         <Route path="bill" component={Bill}>
           <Route path=":id" component={Bill} />
         </Route>
-        <Route path="bills" component={BillList} />
         <Route path="login" component={Login} />
         <Route path="signup" component={Signup} />
         <Route path="profile" component={Profile} />
@@ -31,3 +30,5 @@ ReactDOM.render((
   // eslint-disable-next-line no-undef
   document.getElementById('root')
 );
+
+// <Route path="bills" component={BillList} />
