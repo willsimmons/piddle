@@ -1,8 +1,8 @@
 import React from 'react';
-
+// to do: unfinished
 const url = /^(development|test)$/.test(process.env.NODE_ENV) ? 'http://localhost:3000' : '';
 
-
+//can be refactored for clarity
 class BillList extends React.Component {
 
   constructor(props) {
