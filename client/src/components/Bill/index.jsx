@@ -904,11 +904,11 @@ class Bill extends React.Component {
                   <FormGroup>
                     <InputGroup>
                       <InputGroup.Addon>Link:</InputGroup.Addon>
-                      <InputGroup.Addon>{`http://${window.location.hostname}/bill/${this.state.shortId}`}</InputGroup.Addon>
+                      <InputGroup.Addon>{`https://localhost:3001/bill/${this.state.shortId}`}</InputGroup.Addon>
                       <InputGroup.Button>
                         <ClipboardButton
                           className="btn btn-primary shortLink"
-                          data-clipboard-text={`http://${window.location.hostname}/bill/${this.state.shortId}`}
+                          data-clipboard-text={`https://localhost:3001/bill/${this.state.shortId}`}
                         >
                           <span className="glyphicon glyphicon-copy"></span>
                         </ClipboardButton>
