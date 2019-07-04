@@ -6,7 +6,9 @@
   "scripts": {
     "test": "NODE_ENV=test ./node_modules/.bin/mocha server/spec",
     "start": "NODE_ENV=dev ./node_modules/.bin/nodemon server/server.js",
-    "doc": "./node_modules/.bin/apidoc -i server/routes -o docs/api & ./node_modules/.bin/jsdoc -c ./jsdocsConfig.json"
+    "doc": "./node_modules/.bin/apidoc -i server/routes -o docs/api & ./node_modules/.bin/jsdoc -c ./jsdocsConfig.json",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "apidoc": {
     "title": "The API for the Piddle bill splitting application",
@@ -60,6 +62,8 @@
     "passport-local": "^1.0.0",
     "sequelize": "^3.24.4",
     "sqlite3": "^3.1.6",
-    "supertest": "^2.0.1"
-  }
+    "supertest": "^2.0.1",
+    "snyk": "^1.189.0"
+  },
+  "snyk": true
 }
